@@ -75,7 +75,7 @@ void usage(char *argv0){
 	fprintf(stderr, "       -v               Increase verbose level (may be used multiple times).\n");
 	fprintf(stderr, "       -b buf_size      Specify different buffer size (in bytes, default=%d).\n", MT_BUFSIZE);
 	fprintf(stderr, "       -c count         Repeat the operation <count> times (default=1).\n");
-	fprintf(stderr, "       -s               Seek back to offset before next count.\n");
+	fprintf(stderr, "       -s               Seek back to offset before next count, averaging results.\n");
 	fprintf(stderr, "       -y               Open device with O_SYNC (see open(2) man page).\n");
 	fprintf(stderr, "       -o offset        Starts to operate on device at <offset> (default=%d).\n", MT_OFFSET);
 }
@@ -116,7 +116,7 @@ int main(int argc, char **argv){
 	int		i,j;		// Temporary integers
 
 	// Fetch arguments
-	while ((i = getopt(argc, argv, "hvd:b:c:o:rwizy")) != -1){
+	while ((i = getopt(argc, argv, "hvd:b:c:o:rwizys")) != -1){
 		switch (i){
 			case 'h':
 				// Print help
@@ -414,6 +414,11 @@ int main(int argc, char **argv){
 
 				break;
 		}
+	}
+
+	// Average results if seeking back prior to count iteractions
+	if (seekc == 1){
+		timeacc /= count;
 	}
 
 	// Print time difference
