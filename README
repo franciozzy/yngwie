@@ -76,5 +76,3 @@ Yngwie
  TODO:
   add a -B option that buffers all the output prior to finishing it
   (useful to prevent disk seeking when outputing to the same device being evaluated)
-
-  add a -m option to repeat the experiment multiple times and averaging the results
