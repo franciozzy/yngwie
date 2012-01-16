@@ -21,16 +21,16 @@ Yngwie
 
  Description:
   This program performs read or write operations at random locations
-  of a block device and outputs the time (microseconds) taken for the
+  of a block device and outputs the time (milliseconds) taken for the
   operation to complete.
 
   The output is in the form: O C B T, where:
    O - Offset where the operation was performed
    C - Number of times the operation was executed
    B - Buffer size
-   T - Time (us) to complete the operation
+   T - Time (ms) to complete the operation
 
-  The time is printed in microseconds and includes *only* the time spent
+  The time is printed in milliseconds and includes *only* the time spent
   in the I/O operations.
 
 
