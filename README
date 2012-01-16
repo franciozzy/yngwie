@@ -1,0 +1,80 @@
+Yngwie
+------
+ Random I/O Performance Measurement Tool
+
+ Copyright 2011-2012 (c) Felipe Franciosi <felipe@paradoxo.org>
+
+ Disclaimer:
+  This program is free software: you can redistribute it and/or modify
+  it under the terms of the GNU General Public License as published by
+  the Free Software Foundation, either version 3 of the License, or
+  (at your option) any later version.
+
+  This program is distributed in the hope that it will be useful,
+  but WITHOUT ANY WARRANTY; without even the implied warranty of
+  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+  GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License
+  along with this program.  If not, see <http://www.gnu.org/licenses/>.
+
+
+ Description:
+  This program performs read or write operations at random locations
+  of a block device and outputs the time (microseconds) taken for the
+  operation to complete.
+
+  The output is in the form: O C B T, where:
+   O - Offset where the operation was performed
+   C - Number of times the operation was executed
+   B - Buffer size
+   T - Time (us) to complete the operation
+
+  The time is printed in microseconds and includes *only* the time spent
+  in the I/O operations.
+
+
+ Compiling:
+  gcc -o yngwie yngwie.c -lrt -Wall -O3 -s
+
+
+ Usage:
+  ./yngwie < -r | -w | -i > < -d dev_name > [ -hysv[v] ] [ -b buf_size ] [ -c count ] [ -o offset ]
+ 
+     One of the following operation modes must be selected:
+     -r             Read from device.
+     -w             Write to device (*CAUTION* This will overwrite the device).
+     -i             Print information about the device (default).
+
+     The device must be specified as follows:
+     -d <dev_name>  For example: /dev/sdb
+
+     The following options are available for both reading and writing:
+     -b <buf_size>  Buffer size, in bytes.
+     -c <count>     Repeat the operation <count> times.
+     -o <offset>    Offsets <offset> bytes prior to I/O operations.
+     -s             Seek back to the offset before the next count.
+     -y             Open device with O_SYNC (see open(2) man page).
+
+
+ Changelog:
+  2011.10.19 - Felipe Franciosi
+   - Program creation.
+
+  2011.11.01 - Felipe Franciosi
+   - Major modifications.
+
+  2011.12.06 - Felipe Franciosi
+   - Include counter option.
+
+  2011.12.19 - Felipe Franciosi
+   - Include optional O_SYNC.
+
+  2012.01.16 - Felipe Franciosi
+   - Comitting to github. yay!
+
+ TODO:
+  add a -B option that buffers all the output prior to finishing it
+  (useful to prevent disk seeking when outputing to the same device being evaluated)
+
+  add a -m option to repeat the experiment multiple times and averaging the results
