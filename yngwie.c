@@ -422,7 +422,7 @@ int main(int argc, char **argv){
 	}
 
 	// Print time difference
-	printf("%013"PRIu64" %013lu %013zd %"PRIu64"\n", offset, count, bytesioed, timeacc);
+	printf("%013"PRIu64" %013lu %013zd %"PRIu64"\n", offset, (seekc==1)?1:count, bytesioed, timeacc);
 
 out:
 	// Free buffer
