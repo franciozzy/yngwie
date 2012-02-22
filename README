@@ -44,7 +44,7 @@ Yngwie
      One of the following operation modes must be selected:
      -r             Read from device.
      -w             Write to device (*CAUTION* This will overwrite the device).
-     -i             Print information about the device (default).
+     -i             Print information about the device (default) to stderr.
 
      The device must be specified as follows:
      -d <dev_name>  For example: /dev/sdb
@@ -55,6 +55,7 @@ Yngwie
      -o <offset>    Offsets <offset> bytes prior to I/O operations.
      -s             Seek back to the offset before the next count.
      -y             Open device with O_SYNC (see open(2) man page).
+     -v             Print output of "-i" when reading or writing as well.
 
 
  Changelog:
@@ -74,5 +75,5 @@ Yngwie
    - Comitting to github. yay!
 
  TODO:
-  add a -B option that buffers all the output prior to finishing it
+  add a -B option that buffers all (or most of) the output prior to flushing it
   (useful to prevent disk seeking when outputing to the same device being evaluated)

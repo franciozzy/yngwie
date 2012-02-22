@@ -19,7 +19,7 @@
  *  You should have received a copy of the GNU General Public License
  *  along with this program.  If not, see <http://www.gnu.org/licenses/>.
  *
- * Read the README file for the changelog and information and how to
+ * Read the README file for the changelog and information on how to
  * compile and use this program.
  */
 
@@ -342,16 +342,17 @@ int main(int argc, char **argv){
 
 	// Print verbose stuff
 	if (verbose || io_op==IO_OP_INFO){
-		for (j=0; j<MT_PROGNAME_LEN; j++) printf("-");
-		printf("\n%s\n", MT_PROGNAME);
-		for (j=0; j<MT_PROGNAME_LEN; j++) printf("-");
-		printf("\nDevice \"%s\" has %"PRId64" bytes\n", bdevfn, bdevsize);
-		printf("System pagesize is %d bytes long.\n", psize);
-		printf("Got aligned buffer at %p.\n", buf);
-		printf("Buffer is %"PRId64" bytes long.\n", bufsize);
-		printf("Offsetting to %"PRId64" bytes.\n", offset);
-		for (j=0; j<MT_PROGNAME_LEN; j++) printf("-");
-		printf("\n");
+		for (j=0; j<MT_PROGNAME_LEN; j++) fprintf(stderr, "-");
+		fprintf(stderr, "\n%s\n", MT_PROGNAME);
+		for (j=0; j<MT_PROGNAME_LEN; j++) fprintf(stderr, "-");
+		fprintf(stderr, "\nDevice \"%s\" has %"PRId64" bytes\n", bdevfn, bdevsize);
+		fprintf(stderr, "System pagesize is %d bytes long.\n", psize);
+		fprintf(stderr, "Got aligned buffer at %p.\n", buf);
+		fprintf(stderr, "Buffer is %"PRId64" bytes long.\n", bufsize);
+		fprintf(stderr, "Offsetting to %"PRId64" bytes.\n", offset);
+		for (j=0; j<MT_PROGNAME_LEN; j++) fprintf(stderr, "-");
+		fprintf(stderr, "\n");
+		fflush(stderr);
 	}
 
 	// If we are just outputting info, finish here
@@ -422,7 +423,8 @@ int main(int argc, char **argv){
 	}
 
 	// Print time difference
-	printf("%013"PRIu64" %013lu %013zd %"PRIu64"\n", offset, (seekc==1)?1:count, bytesioed, timeacc);
+	fprintf(stdout, "%013"PRIu64" %013lu %013zd %"PRIu64"\n", offset, (seekc==1)?1:count, bytesioed, timeacc);
+	fflush(stdout);
 
 out:
 	// Free buffer
